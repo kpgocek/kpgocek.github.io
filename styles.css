@@ -132,8 +132,10 @@ a:focus-visible,
   border: 0;
 }
 
+/* Above the wordmark, which is positioned for its touch target. */
 .skip-link {
   position: absolute;
+  z-index: 1;
   left: var(--gutter);
   top: 0;
   transform: translateY(-100%);
@@ -158,19 +160,28 @@ a:focus-visible,
   align-items: baseline;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 0 1.5rem;
+  gap: 0.5rem 1.5rem;
   padding-top: 1.375rem;
   padding-bottom: 1.375rem;
 }
 
 /* Inverted block. Right padding is trimmed by the letter-spacing so the text sits centred. */
 .wordmark {
+  position: relative;
   display: inline-block;
   padding: 0.125rem calc(0.5rem - 0.02em) 0.125rem 0.5rem;
   background: var(--text);
   color: var(--bg);
   letter-spacing: 0.02em;
   text-decoration: none;
+}
+
+/* A 44px touch target without making the block itself any taller. */
+.wordmark::after {
+  content: "";
+  position: absolute;
+  inset-block: calc((100% - 2.75rem) / 2);
+  inset-inline: 0;
 }
 
 .wordmark:hover {
@@ -184,14 +195,11 @@ a:focus-visible,
   gap: 0 1.5rem;
 }
 
-.site-nav a,
-.theme-toggle {
-  min-inline-size: 2.75rem;
-}
-
+/* The side padding reaches 44px wide and the margin takes it back, so the nav gaps stay even. */
 .site-nav a {
   display: block;
-  padding-block: 0.6875rem;
+  margin-inline: -0.25rem;
+  padding: 0.6875rem 0.25rem;
   color: var(--muted);
   font-size: 0.9375rem;
   font-weight: 500;
@@ -205,15 +213,15 @@ a:focus-visible,
 /* Needs theme.js, which sets data-theme, so it stays hidden without JavaScript. */
 .theme-toggle {
   display: none;
-  padding: 0.6875rem 0;
+  /* The start padding reaches 44px wide and the margin takes it back, so the nav gap stays even. */
+  margin-inline-start: -0.875rem;
+  padding: 0.6875rem 0 0.6875rem 0.875rem;
   border: 0;
   background: none;
   color: var(--muted);
   font: inherit;
   font-size: 0.9375rem;
   font-weight: 500;
-  /* Keeps the text flush with the content edge now the button is at least 44px wide. */
-  text-align: end;
   cursor: pointer;
 }
 
@@ -227,8 +235,8 @@ a:focus-visible,
 
 /* Hero */
 .hero {
-  padding-top: clamp(3rem, 8vw, 6rem);
-  padding-bottom: clamp(3.5rem, 8vw, 6rem);
+  padding-top: clamp(2rem, 6vw, 4rem);
+  padding-bottom: clamp(2.5rem, 6vw, 4rem);
 }
 
 /* Square crop; the background shows while the image loads. */
@@ -277,7 +285,7 @@ em {
 .hero .lede {
   max-width: 34ch;
   margin-top: 1.25rem;
-  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+  font-size: clamp(1.25rem, 1.9vw, 1.625rem);
   line-height: 1.45;
   color: var(--muted);
 }
@@ -303,7 +311,7 @@ em {
   margin-top: 1.375rem;
 }
 
-/* The one main action, inverted like the wordmark. */
+/* A main action, inverted like the wordmark. */
 .links a.primary {
   padding-inline: 1rem;
   background: var(--text);
@@ -318,12 +326,7 @@ em {
 }
 
 /* Sections */
-main {
-  counter-reset: section;
-}
-
 .section {
-  counter-increment: section;
   border-top: 1px solid var(--border);
   padding-top: 3rem;
   padding-bottom: 3.5rem;
@@ -333,23 +336,11 @@ main {
 
 .section h2 {
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 3.4vw, 3rem);
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: -0.01em;
   text-wrap: balance;
-}
-
-.section h2::before {
-  content: counter(section, decimal-leading-zero);
-  content: counter(section, decimal-leading-zero) / "";
-  display: block;
-  margin-bottom: 0.625rem;
-  color: var(--emphasis);
-  font-family: var(--font);
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
 }
 
 .statement {
@@ -408,50 +399,35 @@ main {
   color: var(--muted);
 }
 
-@media (min-width: 68em) {
-  .project {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: baseline;
-    column-gap: 2rem;
-  }
-
-  .project .tech {
-    grid-row: 1;
-    grid-column: 2;
-    margin-top: 0;
-  }
-
-  .project .desc,
-  .project .links {
-    grid-column: 1 / -1;
-  }
-}
-
 .project .links {
   margin-top: 0.75rem;
 }
 
-/* Working with */
+/* Working with: the second half of About, so no rule and a tighter gap between them. */
+#about {
+  padding-bottom: 2.5rem;
+}
+
+#stack {
+  border-top: none;
+  padding-top: 0;
+}
+
+/* Project description size, so the list never outranks the work. */
 .inline-list {
-  font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+  font-size: 1.125rem;
   font-weight: 500;
-  line-height: 1.45;
 }
 
 .inline-list li {
   display: inline;
 }
 
-/* Every other item takes the emphasis colour, so the list reads as a rhythm. */
-.inline-list li:nth-child(even) {
-  color: var(--emphasis);
-}
-
+/* The no-break space keeps each dot on its item's line, so no line starts with one. */
 .inline-list li:not(:last-child)::after {
-  content: " · ";
-  content: " · " / "";
-  color: var(--accent);
+  content: "\00a0· ";
+  content: "\00a0· " / "";
+  color: var(--muted);
 }
 
 .secondary {
@@ -477,14 +453,6 @@ main {
   padding-bottom: 3rem;
   font-size: 0.875rem;
   color: var(--muted);
-}
-
-.site-footer a {
-  color: var(--muted);
-}
-
-.site-footer a:hover {
-  color: var(--text);
 }
 
 @media (max-width: 26.25em) {
@@ -528,8 +496,14 @@ main {
   }
 
   /* Backgrounds don't print by default, which would leave the text invisible. */
-  .wordmark {
+  .wordmark,
+  .links a.primary {
     background: none;
     color: inherit;
+  }
+
+  .links a.primary {
+    padding-inline: 0;
+    text-decoration: underline;
   }
 }
