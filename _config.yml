@@ -1,5 +1,5 @@
-title: Krzysztof P. Gocek
-description: Backend .NET developer building APIs, integrations, and independent software projects.
-url: https://kpgocek.github.io
 exclude:
   - README.md
+  - PRODUCT.md
+  - DESIGN.md
+  - img/portrait.jpg

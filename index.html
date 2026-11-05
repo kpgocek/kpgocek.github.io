@@ -29,9 +29,8 @@
        requesting /favicon.ico and logging a 404. Replace if a real mark ever exists. -->
   <link rel="icon" href="data:,">
 
-  <link rel="preload" href="fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/newsreader-display.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script src="theme.js"></script>
 </head>
@@ -41,9 +40,7 @@
 
   <header class="site-header">
     <div class="wrap">
-      <h1>
-        <a class="wordmark" href="#top">KPG | <span id="name">Krzysztof P. Gocek</span></a>
-      </h1>
+      <a class="wordmark" href="#top">KPG | Krzysztof P. Gocek</a>
       <nav class="site-nav" aria-label="Primary">
         <ul>
           <li><a href="#about">About</a></li>
@@ -57,12 +54,19 @@
 
   <main id="main" class="wrap">
     <section class="hero" aria-labelledby="name">
-      <p class="lede"><strong>Backend <em>Systems</em></strong> and some other independent products that I work on
-        occasionally.</p>
-      <p class="links">
-        <a href="#projects">View projects</a>
-        <a href="https://github.com/kpgocek" rel="me">GitHub</a>
-      </p>
+      <!-- The name sits right beside it, so the portrait needs no alt text of its own. -->
+      <img class="portrait" src="img/portrait-480.webp"
+        srcset="img/portrait-480.webp 480w, img/portrait-960.webp 960w"
+        sizes="(min-width: 42.5em) 24rem, 14rem" width="480" height="480" alt="" fetchpriority="high">
+      <div class="hero-text">
+        <h1 id="name">Krzysztof P. Gocek</h1>
+        <p class="lede"><strong>Backend <em>Systems</em></strong> and some other independent products that I work on
+          occasionally.</p>
+        <p class="links">
+          <a href="#projects">View projects</a>
+          <a href="https://github.com/kpgocek" rel="me">GitHub</a>
+        </p>
+      </div>
     </section>
 
     <section class="section" id="about" aria-labelledby="about-title">
@@ -89,7 +93,7 @@
           </p>
           <p class="tech">.NET 10 · Blazor · PostgreSQL</p>
           <p class="links">
-            <a href="https://www.qsmpdle.com">Play<span class="visually-hidden"> QSMPDLE</span></a>
+            <a class="primary" href="https://www.qsmpdle.com">Play<span class="visually-hidden"> QSMPDLE</span></a>
             <a href="https://github.com/kpgocek/QSMPDLE">Source<span class="visually-hidden"> code for
                 QSMPDLE</span></a>
           </p>
