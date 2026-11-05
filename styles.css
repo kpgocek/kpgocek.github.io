@@ -1,0 +1,535 @@
+/* Newsreader's display optical size (opsz 72) at 400, as one static file: it only sets headings. */
+@font-face {
+  font-family: "Newsreader";
+  src: url("fonts/newsreader-display.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url("fonts/atkinson-hyperlegible-next.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+:root {
+  --bg: #171E27;
+  --text: #F2F1EC;
+  --muted: #B1B9BE;
+  --accent: #D3B19A;
+  --border: #394451;
+  --link: var(--accent);
+  --on-accent: var(--bg);
+  --emphasis: var(--accent);
+  --measure: 76rem;
+  --text-measure: 40rem;
+  --gutter: 1.5rem;
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --font: "Atkinson Hyperlegible Next", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+:root[data-theme="light"] {
+  --bg: #F5F3EF;
+  --text: #252C35;
+  --primary: #26374A;
+  --muted: #686B69;
+  --accent: #B28A72;
+  --border: #DFDAD3;
+  /* Accent is too light for text here. */
+  --link: var(--primary);
+  --on-accent: var(--text);
+  --emphasis: #8A6248;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* The one warm touch DESIGN.md allows: hover colours ease in, nothing moves. */
+  a,
+  .theme-toggle {
+    transition: color 120ms ease-out, background-color 120ms ease-out, text-decoration-color 120ms ease-out;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+/* Avoids one-word last lines, e.g. "reading." alone under the Iron Alloy description. */
+p {
+  text-wrap: pretty;
+}
+
+/* Links */
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--accent);
+}
+
+a:hover {
+  color: var(--text);
+  text-decoration-color: currentColor;
+}
+
+a:focus-visible,
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: 0;
+  transform: translateY(-100%);
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  color: var(--link);
+}
+
+.skip-link:focus {
+  transform: translateY(1rem);
+}
+
+.wrap {
+  max-width: calc(var(--measure) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Header */
+.site-header .wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+  padding-top: 1.375rem;
+  padding-bottom: 1.375rem;
+}
+
+/* Inverted block. Right padding is trimmed by the letter-spacing so the text sits centred. */
+.wordmark {
+  display: inline-block;
+  padding: 0.125rem calc(0.5rem - 0.02em) 0.125rem 0.5rem;
+  background: var(--text);
+  color: var(--bg);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.wordmark:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+}
+
+.site-nav a,
+.theme-toggle {
+  min-inline-size: 2.75rem;
+}
+
+.site-nav a {
+  display: block;
+  padding-block: 0.6875rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--text);
+}
+
+/* Needs theme.js, which sets data-theme, so it stays hidden without JavaScript. */
+.theme-toggle {
+  display: none;
+  padding: 0.6875rem 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  /* Keeps the text flush with the content edge now the button is at least 44px wide. */
+  text-align: end;
+  cursor: pointer;
+}
+
+:root[data-theme] .theme-toggle {
+  display: block;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+}
+
+/* Hero */
+.hero {
+  padding-top: clamp(3rem, 8vw, 6rem);
+  padding-bottom: clamp(3.5rem, 8vw, 6rem);
+}
+
+/* Square crop; the background shows while the image loads. */
+.portrait {
+  display: block;
+  width: min(14rem, 60%);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin-bottom: 2rem;
+  background: var(--border);
+}
+
+/* Same columns as .section below, so the portrait sits over the headings and the name over the content. */
+@media (min-width: 42.5em) {
+  .hero:has(.portrait) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 3rem;
+    align-items: end;
+  }
+
+  .portrait {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
+/* Headings use the serif and everything else the sans. The serif file has one weight, so headings stay at 400 to avoid a faux bold. */
+.hero h1 {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 9vw, 6rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Emphasis is colour only: no italics anywhere. */
+em {
+  color: var(--emphasis);
+  font-style: normal;
+}
+
+.hero .lede {
+  max-width: 34ch;
+  margin-top: 1.25rem;
+  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.hero .lede strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+}
+
+/* Vertical padding gives touch targets a 44px height; margins below allow for it. */
+.links a {
+  min-inline-size: 2.75rem;
+  padding-block: 0.6875rem;
+}
+
+.hero .links {
+  margin-top: 1.375rem;
+}
+
+/* The one main action, inverted like the wordmark. */
+.links a.primary {
+  padding-inline: 1rem;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.links a.primary:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Sections */
+main {
+  counter-reset: section;
+}
+
+.section {
+  counter-increment: section;
+  border-top: 1px solid var(--border);
+  padding-top: 3rem;
+  padding-bottom: 3.5rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 3.4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.section h2::before {
+  content: counter(section, decimal-leading-zero);
+  content: counter(section, decimal-leading-zero) / "";
+  display: block;
+  margin-bottom: 0.625rem;
+  color: var(--emphasis);
+  font-family: var(--font);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.statement {
+  max-width: 36ch;
+  font-size: clamp(1.25rem, 1.9vw, 1.625rem);
+  line-height: 1.45;
+}
+
+.section .body>p+p {
+  margin-top: 1rem;
+}
+
+@media (min-width: 42.5em) {
+  .section {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 3rem;
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+  }
+
+  /* Keeps the heading in view beside a long section. */
+  .section h2 {
+    position: sticky;
+    top: 2rem;
+    align-self: start;
+  }
+}
+
+/* Projects */
+.project+.project {
+  margin-top: 2.25rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.project h3 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.project .desc {
+  margin-top: 0.875rem;
+  max-width: var(--text-measure);
+  font-size: 1.125rem;
+}
+
+.project .tech {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@media (min-width: 68em) {
+  .project {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    column-gap: 2rem;
+  }
+
+  .project .tech {
+    grid-row: 1;
+    grid-column: 2;
+    margin-top: 0;
+  }
+
+  .project .desc,
+  .project .links {
+    grid-column: 1 / -1;
+  }
+}
+
+.project .links {
+  margin-top: 0.75rem;
+}
+
+/* Working with */
+.inline-list {
+  font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.inline-list li {
+  display: inline;
+}
+
+/* Every other item takes the emphasis colour, so the list reads as a rhythm. */
+.inline-list li:nth-child(even) {
+  color: var(--emphasis);
+}
+
+.inline-list li:not(:last-child)::after {
+  content: " · ";
+  content: " · " / "";
+  color: var(--accent);
+}
+
+.secondary {
+  margin-top: 1.25rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+/* Contact */
+.contact .links {
+  margin-top: 0.75rem;
+  font-size: 1.25rem;
+}
+
+/* Footer */
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.site-footer a {
+  color: var(--muted);
+}
+
+.site-footer a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 26.25em) {
+  :root {
+    --gutter: 1.25rem;
+  }
+
+  .site-nav ul {
+    gap: 1.125rem;
+  }
+}
+
+@media print {
+
+  :root,
+  :root[data-theme="light"] {
+    --bg: #fff;
+    --text: #000;
+    --muted: #555;
+    --border: #ccc;
+    --accent: #000;
+    --link: #000;
+    --emphasis: #000;
+  }
+
+  .hero h1 {
+    font-size: 4rem;
+  }
+
+  .section h2 {
+    position: static;
+  }
+
+  .site-nav,
+  .skip-link {
+    display: none;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  /* Backgrounds don't print by default, which would leave the text invisible. */
+  .wordmark {
+    background: none;
+    color: inherit;
+  }
+}
