@@ -2,19 +2,18 @@
 
 Personal site of Krzysztof P. Gocek, served at <https://kpgocek.github.io>.
 
-A single static page: plain HTML and CSS with one image (the portrait) and no dependencies or build steps. The only JavaScript is the theme toggle.
+A single static page: plain HTML and CSS with no images and no JavaScript, dependencies or build steps.
 
 ## Files
 
 | File | Purpose |
 | --- | --- |
 | `index.html` | The page |
-| `styles.css` | All styling, shared by both pages |
 | `404.html` | Shown by GitHub Pages for any missing URL |
-| `theme.js` | Dark/light toggle; dark unless the visitor picks light |
-| `fonts/` | Self-hosted Newsreader (headings, display optical size) and Atkinson Hyperlegible Next (everything else), Latin subsets, and their licences |
-| `img/` | The portrait: `portrait.jpg` is the unpublished source, the `.webp` files are what the page loads |
-| `_config.yml` | Keeps the source portrait and the project notes (`README.md`, `PRODUCT.md`, `DESIGN.md`) from being published |
+| `styles.css` | All styles, shared by both pages |
+| `fonts/` | Self-hosted Big Shoulders and Atkinson Hyperlegible Next, with their OFL licences |
+| `img/` | `portrait.jpg` and its `.webp` renditions; not used by the pages today |
+| `_config.yml` | Keeps the source portrait, image notes and project notes (`README.md`, `PRODUCT.md`, `DESIGN.md`) from being published |
 
 ## Deployment
 
