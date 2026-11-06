@@ -34,13 +34,12 @@
 </head>
 
 <body>
-  <a class="skip ticket ticket--fill" href="#main">Skip to content</a>
+  <a class="button button--primary" href="#main">Skip to content</a>
 
-  <div class="bill">
-    <header class="bar">
-      <a class="mark label" href="/">Krzysztof P. Gocek</a>
+    <header>
+      <a href="/">Krzysztof P. Gocek</a>
       <nav aria-label="Primary">
-        <ul class="label">
+        <ul>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -49,80 +48,70 @@
     </header>
 
     <main id="main">
-      <section class="hero" aria-labelledby="title">
-        <h1 id="title" class="display lean">Backend .NET&nbsp;Developer</h1>
-        <p class="lede">APIs, integrations, and independent products.</p>
+      <section aria-labelledby="title">
+        <h1 id="title">Backend .NET&nbsp;Developer</h1>
+        <p>APIs, integrations, and independent products.</p>
         <p class="actions">
-          <a class="ticket ticket--fill" href="mailto:krzysztof.gocek@protonmail.com">Email</a>
-          <a class="ticket" href="https://github.com/kpgocek" rel="me">GitHub</a>
+          <a class="button button--primary" href="mailto:krzysztof.gocek@protonmail.com">Email</a>
+          <a class="button" href="https://github.com/kpgocek" rel="me">GitHub</a>
         </p>
       </section>
 
-      <section class="block" id="projects" aria-labelledby="projects-title">
-        <h2 id="projects-title" class="block-head label">Selected projects</h2>
-        <ol class="programme">
-          <li class="act">
-            <span class="act__no" aria-hidden="true">I</span>
-            <div>
-              <h3 class="act__title"><a class="act__link" href="https://www.qsmpdle.com">QSMPDLE</a> <span
+      <section id="projects" aria-labelledby="projects-title">
+        <h2 id="projects-title">Selected projects</h2>
+        <ul>
+          <li>
+              <h3>QSMPDLE <span
                   class="tag">Live</span></h3>
               <p>A live daily character guessing game based on QSMP2. Includes daily challenges, practice, archive, and
                 personal statistics.</p>
-              <ul class="credits" aria-label="Built with">
+              <ul aria-label="Built with">
                 <li>.NET 10</li>
                 <li>Blazor</li>
                 <li>PostgreSQL</li>
               </ul>
-            </div>
-            <p class="act__links label">
-              <a href="https://www.qsmpdle.com">Play</a>
-              <a href="https://github.com/kpgocek/QSMPDLE">Source code</a>
+            <p class="actions">
+              <a class="button" href="https://www.qsmpdle.com">Play</a>
+              <a class="button" href="https://github.com/kpgocek/QSMPDLE">Source code</a>
             </p>
           </li>
 
-          <li class="act">
-            <span class="act__no" aria-hidden="true">II</span>
-            <div>
-              <h3 class="act__title"><a class="act__link"
-                  href="https://mods.paradoxplaza.com/mods/134032/Windows">Parking Fee Control</a> <span
+          <li>
+              <h3>Parking Fee Control <span
                   class="tag">Published</span></h3>
               <p>A Cities: Skylines II mod for global parking fee management.</p>
-              <ul class="credits" aria-label="Built with">
+              <ul aria-label="Built with">
                 <li>C#</li>
               </ul>
-            </div>
-            <p class="act__links label">
-              <a href="https://mods.paradoxplaza.com/mods/134032/Windows">Mod page</a>
-              <a href="https://github.com/kpgocek/parking-fee-control">Source code</a>
+            <p class="actions">
+              <a class="button" href="https://mods.paradoxplaza.com/mods/134032/Windows">Mod page</a>
+              <a class="button" href="https://github.com/kpgocek/parking-fee-control">Source code</a>
             </p>
           </li>
 
-          <li class="act">
-            <span class="act__no" aria-hidden="true">III</span>
-            <div>
-              <h3 class="act__title"><a class="act__link" href="https://github.com/kpgocek/Iron-Alloy">Iron Alloy</a>
+          <li>
+              <h3>Iron Alloy
                 <span class="tag tag--open">In progress</span>
               </h3>
               <p>A monochromatic Obsidian theme designed for focused writing and long&#8209;form reading. Work in
                 progress.</p>
-              <ul class="credits" aria-label="Built with">
+              <ul aria-label="Built with">
                 <li>CSS</li>
               </ul>
-            </div>
-            <p class="act__links label">
-              <a href="https://github.com/kpgocek/Iron-Alloy">Source code</a>
+            <p class="actions">
+              <a class="button" href="https://github.com/kpgocek/Iron-Alloy">Source code</a>
             </p>
           </li>
-        </ol>
+        </ul>
       </section>
 
-      <section class="block" id="about" aria-labelledby="about-title">
-        <h2 id="about-title" class="block-head label">About</h2>
-        <p class="prose">I build backend systems with a <em>product mindset</em>: readable architecture, maintainable
+      <section id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+        <p>I build backend systems with a <em>product mindset</em>: readable architecture, maintainable
           code, and practical problems actually solved. Outside work, I ship my own products end to end. Mostly open
           source.</p>
-        <h3 class="label prose">My preferred tech stack</h3>
-        <ul class="credits">
+        <h3>My preferred tech stack</h3>
+        <ul>
           <li>C#</li>
           <li>ASP.NET&nbsp;Core</li>
           <li>REST&nbsp;APIs</li>
@@ -134,23 +123,22 @@
         </ul>
       </section>
 
-      <section class="block" id="contact" aria-labelledby="contact-title">
-        <h2 id="contact-title" class="block-head label">Contact</h2>
-        <p class="prose">For engineering, projects, or collaboration, contact me via email.</p>
+      <section id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+        <p>For engineering, projects, or collaboration, contact me via email.</p>
         <p class="actions">
-          <a class="ticket ticket--fill" href="mailto:krzysztof.gocek@protonmail.com">Email</a>
-          <a class="ticket" href="https://x.com/kpgocek" rel="me">X (@kpgocek)</a>
-          <a class="ticket" href="https://github.com/kpgocek/kpgocek.github.io/issues/new">Open an issue</a>
+          <a class="button button--primary" href="mailto:krzysztof.gocek@protonmail.com">Email</a>
+          <a class="button" href="https://x.com/kpgocek" rel="me">X (@kpgocek)</a>
+          <a class="button" href="https://github.com/kpgocek/kpgocek.github.io/issues/new">Open an issue</a>
         </p>
-        <p class="quiet"><a href="https://ko-fi.com/kpgocek">Support me on Ko-fi</a></p>
+        <p><a href="https://ko-fi.com/kpgocek">Support me on Ko-fi</a></p>
       </section>
     </main>
 
-    <footer class="stub">
+    <footer>
       <p>© 2026 Krzysztof P. Gocek</p>
-      <p>Plain HTML and CSS. No build step, no dependencies, no tracking.</p>
+      <p>Plain HTML and CSS. No building, no dependencies, no tracking.</p>
     </footer>
-  </div>
 </body>
 
 </html>
