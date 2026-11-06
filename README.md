@@ -13,7 +13,7 @@ A single static page: plain HTML and CSS with no images and no JavaScript, depen
 | `styles.css` | All styles, shared by both pages |
 | `fonts/` | Self-hosted Big Shoulders and Atkinson Hyperlegible Next, with their OFL licences |
 | `img/` | `portrait.jpg` and its `.webp` renditions; not used by the pages today |
-| `_config.yml` | Keeps the source portrait, image notes and project notes (`README.md`, `PRODUCT.md`, `DESIGN.md`) from being published |
+| `_config.yml` | Keeps the source portrait, image notes and project notes from being published |
 
 ## Deployment
 
