@@ -1,8 +1,8 @@
-/* Newsreader's display optical size (opsz 72) at 400, as one static file: it only sets headings. */
+/* Two inks sampled from the portrait: jacket navy stock, lamp-light ink. No midtones. */
 @font-face {
-  font-family: "Newsreader";
-  src: url("fonts/newsreader-display.woff2") format("woff2");
-  font-weight: 400;
+  font-family: "Big Shoulders";
+  src: url("fonts/big-shoulders.woff2") format("woff2");
+  font-weight: 800 900;
   font-display: swap;
 }
 
@@ -14,33 +14,15 @@
 }
 
 :root {
-  --bg: #171E27;
-  --text: #F2F1EC;
-  --muted: #B1B9BE;
-  --accent: #D3B19A;
-  --border: #394451;
-  --link: var(--accent);
-  --on-accent: var(--bg);
-  --emphasis: var(--accent);
-  --measure: 76rem;
-  --text-measure: 40rem;
-  --gutter: 1.5rem;
-  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
-  --font: "Atkinson Hyperlegible Next", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-
-:root[data-theme="light"] {
-  --bg: #F5F3EF;
-  --text: #252C35;
-  --primary: #26374A;
-  --muted: #686B69;
-  --accent: #B28A72;
-  --border: #DFDAD3;
-  /* Accent is too light for text here. */
-  --link: var(--primary);
-  --on-accent: var(--text);
-  --emphasis: #8A6248;
+  --stock: #1E222C;
+  --ink: #D9A45C;
+  --rule: 3px;
+  --gutter: clamp(1rem, 3.5vw, 3.5rem);
+  --step: clamp(0.75rem, 3vw, 2.5rem);
+  --display: "Big Shoulders", "Arial Narrow", sans-serif;
+  --body: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  color-scheme: dark;
+  scrollbar-color: var(--ink) var(--stock);
 }
 
 *,
@@ -52,458 +34,386 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* The one warm touch DESIGN.md allows: hover colours ease in, nothing moves. */
-  a,
-  .theme-toggle {
-    transition: color 120ms ease-out, background-color 120ms ease-out, text-decoration-color 120ms ease-out;
-  }
+  background: var(--stock);
 }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font);
+  background: var(--stock);
+  color: var(--ink);
+  font-family: var(--body);
   font-size: 1.0625rem;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--on-accent);
+  background: var(--ink);
+  color: var(--stock);
 }
 
-h1,
-h2,
-h3,
-p,
-ul {
+a {
+  color: inherit;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+}
+
+:focus-visible {
+  outline: var(--rule) solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Emphasis is a reversal, never italics. */
+em {
+  font-style: normal;
+  background: var(--ink);
+  color: var(--stock);
+  padding: 0 0.2em;
+}
+
+.skip {
+  position: absolute;
+  left: var(--gutter);
+  top: -10rem;
+  z-index: 2;
+}
+
+.skip:focus {
+  top: 0.75rem;
+}
+
+/* Page: one bill, centred. */
+.bill {
+  display: flex;
+  flex-direction: column;
+  max-width: 80rem;
+  min-height: 100vh;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Spare height goes to main, never to the bar or the stub. */
+.bill > main {
+  flex: 1;
+}
+
+/* Type voices: one display, one label, one body. */
+.display,
+.label,
+.ticket,
+.act__no,
+.act__title,
+.tag,
+.credits {
+  font-family: var(--display);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.display {
   margin: 0;
+  /* The bill's title fills its column; the world overrides the usual 6rem cap. */
+  font-size: clamp(3.5rem, 9.8vw, 9rem);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
 }
 
-ul {
+.lean {
+  transform: skewY(-4deg);
+  transform-origin: 0 100%;
+}
+
+.label {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+/* Top bar */
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-block: 0.75rem;
+  border-bottom: var(--rule) solid var(--ink);
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  font-size: 1.0625rem;
+  text-decoration: none;
+}
+
+.mark b {
+  background: var(--ink);
+  color: var(--stock);
+  padding: 0.15em 0.4em;
+  font-weight: 900;
+}
+
+.bar ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* Avoids one-word last lines, e.g. "reading." alone under the Iron Alloy description. */
-p {
-  text-wrap: pretty;
+.bar ul a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
 }
 
-/* Links */
-a {
-  color: var(--link);
+.bar ul a:hover {
   text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.2em;
-  text-decoration-color: var(--accent);
-}
-
-a:hover {
-  color: var(--text);
-  text-decoration-color: currentColor;
-}
-
-a:focus-visible,
-.theme-toggle:focus-visible {
-  outline: 2px solid var(--link);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Above the wordmark, which is positioned for its touch target. */
-.skip-link {
-  position: absolute;
-  z-index: 1;
-  left: var(--gutter);
-  top: 0;
-  transform: translateY(-100%);
-  padding: 0.5rem 0.75rem;
-  background: var(--bg);
-  color: var(--link);
-}
-
-.skip-link:focus {
-  transform: translateY(1rem);
-}
-
-.wrap {
-  max-width: calc(var(--measure) + var(--gutter) * 2);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-}
-
-/* Header */
-.site-header .wrap {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  padding-top: 1.375rem;
-  padding-bottom: 1.375rem;
-}
-
-/* Inverted block. Right padding is trimmed by the letter-spacing so the text sits centred. */
-.wordmark {
-  position: relative;
-  display: inline-block;
-  padding: 0.125rem calc(0.5rem - 0.02em) 0.125rem 0.5rem;
-  background: var(--text);
-  color: var(--bg);
-  letter-spacing: 0.02em;
-  text-decoration: none;
-}
-
-/* A 44px touch target without making the block itself any taller. */
-.wordmark::after {
-  content: "";
-  position: absolute;
-  inset-block: calc((100% - 2.75rem) / 2);
-  inset-inline: 0;
-}
-
-.wordmark:hover {
-  background: var(--accent);
-  color: var(--on-accent);
-}
-
-.site-nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 1.5rem;
-}
-
-/* The side padding reaches 44px wide and the margin takes it back, so the nav gaps stay even. */
-.site-nav a {
-  display: block;
-  margin-inline: -0.25rem;
-  padding: 0.6875rem 0.25rem;
-  color: var(--muted);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.site-nav a:hover {
-  color: var(--text);
-}
-
-/* Needs theme.js, which sets data-theme, so it stays hidden without JavaScript. */
-.theme-toggle {
-  display: none;
-  /* The start padding reaches 44px wide and the margin takes it back, so the nav gap stays even. */
-  margin-inline-start: -0.875rem;
-  padding: 0.6875rem 0 0.6875rem 0.875rem;
-  border: 0;
-  background: none;
-  color: var(--muted);
-  font: inherit;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-:root[data-theme] .theme-toggle {
-  display: block;
-}
-
-.theme-toggle:hover {
-  color: var(--text);
 }
 
 /* Hero */
 .hero {
-  padding-top: clamp(2rem, 6vw, 4rem);
-  padding-bottom: clamp(2.5rem, 6vw, 4rem);
+  /* Top room covers the headline's lean. */
+  padding-block: clamp(3rem, 8vh, 4.5rem) 0;
 }
 
-/* Square crop; the background shows while the image loads. */
-.portrait {
-  display: block;
-  width: min(14rem, 60%);
-  height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
-  margin-bottom: 2rem;
-  background: var(--border);
+.lede {
+  max-width: 30ch;
+  margin: 1.5rem 0 0;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  line-height: 1.4;
 }
 
-/* Same columns as .section below, so the portrait sits over the headings and the name over the content. */
-@media (min-width: 42.5em) {
-  .hero:has(.portrait) {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    gap: 3rem;
-    align-items: end;
-  }
-
-  .portrait {
-    width: 100%;
-    margin-bottom: 0;
-  }
-}
-
-/* Headings use the serif and everything else the sans. The serif file has one weight, so headings stay at 400 to avoid a faux bold. */
-.hero h1 {
-  color: var(--text);
-  font-family: var(--font-display);
-  font-size: clamp(3.25rem, 9vw, 6rem);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-}
-
-/* Emphasis is colour only: no italics anywhere. */
-em {
-  color: var(--emphasis);
-  font-style: normal;
-}
-
-.hero .lede {
-  max-width: 34ch;
-  margin-top: 1.25rem;
-  font-size: clamp(1.25rem, 1.9vw, 1.625rem);
-  line-height: 1.45;
-  color: var(--muted);
-}
-
-.hero .lede strong {
-  color: var(--text);
-  font-weight: 500;
-}
-
-.links {
+.actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 1.5rem;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin: 1.75rem 0 0;
 }
 
-/* Vertical padding gives touch targets a 44px height; margins below allow for it. */
-.links a {
-  min-inline-size: 2.75rem;
-  padding-block: 0.6875rem;
-}
-
-.hero .links {
-  margin-top: 1.375rem;
-}
-
-/* A main action, inverted like the wordmark. */
-.links a.primary {
-  padding-inline: 1rem;
-  background: var(--text);
-  color: var(--bg);
-  font-weight: 500;
+/* The ticket: a bordered action; filled for the one that matters. Hard cuts, no easing. */
+.ticket {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.5rem 1.25rem;
+  border: var(--rule) solid var(--ink);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-decoration: none;
 }
 
-.links a.primary:hover {
-  background: var(--accent);
-  color: var(--on-accent);
+/* The ticket: a bordered action; filled for the one that matters. */
+.ticket:hover,
+.ticket--fill {
+  background: var(--ink);
+  color: var(--stock);
+}
+
+.ticket--fill:hover {
+  background: var(--stock);
+  color: var(--ink);
 }
 
 /* Sections */
-.section {
-  border-top: 1px solid var(--border);
-  padding-top: 3rem;
-  padding-bottom: 3.5rem;
+.block {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+}
+
+.block-head {
+  margin: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: var(--rule) solid var(--ink);
+  font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+}
+
+.prose {
+  max-width: 62ch;
+  margin: 1.25rem 0 0;
+  font-size: 1.0625rem;
+}
+
+/* The programme: each project is an act, stepped down the bill. */
+.programme {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero + .block {
+  padding-top: clamp(2rem, 5vh, 3rem);
+}
+
+.act {
+  position: relative;
   display: grid;
-  gap: 2rem;
+  grid-template-columns: 3.75rem minmax(0, 1fr) auto;
+  gap: 0.25rem 1.5rem;
+  align-items: start;
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--ink);
 }
 
-.section h2 {
-  font-family: var(--font-display);
-  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
+.act:nth-child(3n + 2) {
+  margin-left: var(--step);
 }
 
-.statement {
-  max-width: 36ch;
-  font-size: clamp(1.25rem, 1.9vw, 1.625rem);
-  line-height: 1.45;
+.act:nth-child(3n + 3) {
+  margin-left: calc(var(--step) * 2);
 }
 
-.section .body>p+p {
-  margin-top: 1rem;
+.act:hover,
+.act:focus-within {
+  background: var(--ink);
+  color: var(--stock);
 }
 
-@media (min-width: 42.5em) {
-  .section {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    gap: 3rem;
-    padding-top: 4rem;
-    padding-bottom: 5rem;
-  }
-
-  /* Keeps the heading in view beside a long section. */
-  .section h2 {
-    position: sticky;
-    top: 2rem;
-    align-self: start;
-  }
+.act:hover em,
+.act:focus-within em {
+  background: var(--stock);
+  color: var(--ink);
 }
 
-/* Projects */
-.project+.project {
-  margin-top: 2.25rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--border);
+.act :focus-visible {
+  outline-color: var(--stock);
+  outline-offset: 2px;
 }
 
-.project h3 {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.05;
+/* The act number is a cut block; currentColor keeps it inverting with the row. */
+.act__no {
+  display: grid;
+  place-items: center;
+  height: 3.25rem;
+  border: var(--rule) solid currentColor;
+  font-size: 2rem;
+  font-weight: 900;
 }
 
-.project .desc {
-  margin-top: 0.875rem;
-  max-width: var(--text-measure);
-  font-size: 1.125rem;
+/* The whole row is the target: the title's link stretches over it. */
+.act__link {
+  text-decoration: none;
 }
 
-.project .tech {
-  margin-top: 0.5rem;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
+.act__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
 }
 
-.project .links {
-  margin-top: 0.75rem;
+.act__links {
+  position: relative;
+  z-index: 1;
 }
 
-/* Working with: the second half of About, so no rule and a tighter gap between them. */
-#about {
-  padding-bottom: 2.5rem;
+.act__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.875rem;
+  margin: 0;
+  font-size: clamp(1.75rem, 3vw, 2.375rem);
+  font-weight: 900;
 }
 
-#stack {
-  border-top: none;
-  padding-top: 0;
-}
-
-/* Project description size, so the list never outranks the work. */
-.inline-list {
-  font-size: 1.125rem;
-  font-weight: 500;
-}
-
-.inline-list li {
-  display: inline;
-}
-
-/* The no-break space keeps each dot on its item's line, so no line starts with one. */
-.inline-list li:not(:last-child)::after {
-  content: "\00a0· ";
-  content: "\00a0· " / "";
-  color: var(--muted);
-}
-
-.secondary {
-  margin-top: 1.25rem;
-  color: var(--muted);
+.tag {
+  padding: 0.2em 0.45em 0.15em;
+  border: 2px solid currentColor;
   font-size: 0.9375rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+/* Unfinished work is drawn as such, not hidden. */
+.tag--open {
+  border-style: dashed;
+}
+
+.act p {
+  max-width: 58ch;
+  margin: 0.5rem 0 0;
+}
+
+.credits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.act__links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0;
+}
+
+.act__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 /* Contact */
-.contact .links {
-  margin-top: 0.75rem;
-  font-size: 1.25rem;
+.quiet {
+  margin: 1.25rem 0 0;
 }
 
-/* Footer */
-.footer-row {
+.quiet a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* Footer: the ticket stub. */
+.bill > .stub {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-  border-top: 1px solid var(--border);
-  padding-top: 2rem;
-  padding-bottom: 3rem;
-  font-size: 0.875rem;
-  color: var(--muted);
+  gap: 0.5rem 2rem;
+  margin-top: clamp(3rem, 8vw, 5rem);
+  padding-block: 1rem var(--gutter);
+  font-size: 0.9375rem;
 }
 
-@media (max-width: 26.25em) {
-  :root {
-    --gutter: 1.25rem;
-  }
-
-  .site-nav ul {
-    gap: 1.125rem;
-  }
+.stub p {
+  margin: 0;
 }
 
-@media print {
-
-  :root,
-  :root[data-theme="light"] {
-    --bg: #fff;
-    --text: #000;
-    --muted: #555;
-    --border: #ccc;
-    --accent: #000;
-    --link: #000;
-    --emphasis: #000;
+@media (max-width: 60em) {
+  .hero {
+    padding-top: 3rem;
   }
 
-  .hero h1 {
-    font-size: 4rem;
+  .act {
+    padding-inline: 0.75rem;
   }
 
-  .section h2 {
-    position: static;
+  .act__links {
+    grid-column: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 1.25rem;
   }
 
-  .site-nav,
-  .skip-link {
-    display: none;
+  .act {
+    grid-template-columns: 2.75rem minmax(0, 1fr);
   }
 
-  a {
-    color: inherit;
-  }
-
-  /* Backgrounds don't print by default, which would leave the text invisible. */
-  .wordmark,
-  .links a.primary {
-    background: none;
-    color: inherit;
-  }
-
-  .links a.primary {
-    padding-inline: 0;
-    text-decoration: underline;
+  .act__no {
+    height: 2.75rem;
+    font-size: 1.625rem;
   }
 }

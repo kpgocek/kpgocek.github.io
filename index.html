@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Krzysztof P. Gocek — Backend .NET developer</title>
+  <title>Krzysztof P. Gocek | Backend .NET developer</title>
   <meta name="description"
     content="Krzysztof P. Gocek (@kpgocek). Backend .NET developer building APIs, integrations, and independent products.">
   <meta name="author" content="Krzysztof P. Gocek">
   <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#171E27">
+  <meta name="theme-color" content="#1E222C">
 
   <link rel="canonical" href="https://kpgocek.github.io/">
 
@@ -18,7 +18,7 @@
   <meta property="og:type" content="profile">
   <meta property="og:title" content="Krzysztof P. Gocek — Backend .NET developer">
   <meta property="og:description"
-    content="Backend .NET developer. I build APIs, integrations, and independent products.">
+    content="Backend .NET developer building APIs, integrations, and independent products.">
   <meta property="og:locale" content="en_GB">
   <meta property="profile:username" content="kpgocek">
   <meta name="twitter:card" content="summary">
@@ -28,134 +28,124 @@
   <!-- Favicon strategy: intentionally none. The empty data URI stops browsers
        requesting /favicon.ico and logging a 404. Replace if a real mark ever exists. -->
   <link rel="icon" href="data:,">
-
-  <link rel="preload" href="fonts/newsreader-display.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/big-shoulders.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
-  <script src="theme.js"></script>
 </head>
 
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip ticket ticket--fill" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="wrap">
-      <a class="wordmark" href="#top">KPG | Krzysztof P. Gocek</a>
-      <nav class="site-nav" aria-label="Primary">
-        <ul>
+  <div class="bill">
+    <header class="bar">
+      <a class="mark label" href="/"><b>KPG</b> Krzysztof P. Gocek</a>
+      <nav aria-label="Primary">
+        <ul class="label">
           <li><a href="#projects">Projects</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><button class="theme-toggle" type="button">Light</button></li>
         </ul>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <main id="main" class="wrap">
-    <section class="hero" aria-labelledby="name">
-      <!-- The name sits right beside it, so the portrait needs no alt text of its own. -->
-      <img class="portrait" src="img/portrait-480.webp"
-        srcset="img/portrait-480.webp 480w, img/portrait-960.webp 960w"
-        sizes="(min-width: 42.5em) 24rem, 14rem" width="480" height="480" alt="" fetchpriority="high">
-      <div class="hero-text">
-        <h1 id="name">Krzysztof P. Gocek</h1>
-        <p class="lede"><strong>Backend <em>.NET</em> developer.</strong> I&nbsp;build APIs, integrations, and independent
-          products.</p>
-        <p class="links">
-          <a class="primary" href="#projects">View projects</a>
-          <a href="https://github.com/kpgocek" rel="me">GitHub</a>
+    <main id="main">
+      <section class="hero" aria-labelledby="title">
+        <h1 id="title" class="display lean">Backend .NET developer.</h1>
+        <p class="lede">Building APIs, integrations, and independent products.</p>
+        <p class="actions">
+          <a class="ticket ticket--fill" href="mailto:krzysztof.gocek@protonmail.com">Email</a>
+          <a class="ticket" href="https://github.com/kpgocek" rel="me">GitHub</a>
         </p>
-      </div>
-    </section>
+      </section>
 
-    <section class="section" id="projects" aria-labelledby="projects-title">
-      <h2 id="projects-title">Selected projects</h2>
-      <div class="body">
-        <article class="project">
-          <h3>QSMPDLE</h3>
-          <p class="desc">A live daily character guessing game based on QSMP2.
-            Includes daily challenges, practice, archive, and personal statistics.
-          </p>
-          <p class="tech">.NET 10 · Blazor · PostgreSQL</p>
-          <p class="links">
-            <a class="primary" href="https://www.qsmpdle.com">Play<span class="visually-hidden"> QSMPDLE</span></a>
-            <a href="https://github.com/kpgocek/QSMPDLE">Source<span class="visually-hidden"> code for
-                QSMPDLE</span></a>
-          </p>
-        </article>
+      <section class="block" id="projects" aria-labelledby="projects-title">
+        <h2 id="projects-title" class="block-head label">Selected projects</h2>
+        <ol class="programme">
+          <li class="act">
+            <span class="act__no" aria-hidden="true">I</span>
+            <div>
+              <h3 class="act__title"><a class="act__link" href="https://www.qsmpdle.com">QSMPDLE</a> <span class="tag">Live</span></h3>
+              <p>A live daily character guessing game based on QSMP2. Includes daily challenges, practice, archive, and
+                personal statistics.</p>
+              <ul class="credits" aria-label="Built with">
+                <li>.NET 10</li>
+                <li>Blazor</li>
+                <li>PostgreSQL</li>
+              </ul>
+            </div>
+            <p class="act__links label">
+              <a href="https://www.qsmpdle.com">Play</a>
+              <a href="https://github.com/kpgocek/QSMPDLE">Source code</a>
+            </p>
+          </li>
 
-        <article class="project">
-          <h3>Parking Fee Control</h3>
-          <p class="desc">A Cities: Skylines II mod for global parking fee management.</p>
-          <p class="tech">C#</p>
-          <p class="links">
-            <a href="https://github.com/kpgocek/parking-fee-control">Source<span class="visually-hidden"> code for
-                Parking Fee Control</span></a>
-            <a href="https://mods.paradoxplaza.com/mods/134032/Windows">Mod page<span class="visually-hidden"> for
-                Parking Fee Control on Paradox Mods</span></a>
-          </p>
-        </article>
+          <li class="act">
+            <span class="act__no" aria-hidden="true">II</span>
+            <div>
+              <h3 class="act__title"><a class="act__link" href="https://mods.paradoxplaza.com/mods/134032/Windows">Parking Fee Control</a> <span class="tag">Published</span></h3>
+              <p>A Cities: Skylines II mod for global parking fee management.</p>
+              <ul class="credits" aria-label="Built with">
+                <li>C#</li>
+              </ul>
+            </div>
+            <p class="act__links label">
+              <a href="https://mods.paradoxplaza.com/mods/134032/Windows">Mod page</a>
+              <a href="https://github.com/kpgocek/parking-fee-control">Source code</a>
+            </p>
+          </li>
 
-        <article class="project">
-          <h3>Iron Alloy</h3>
-          <p class="desc">A monochromatic Obsidian theme designed for focused writing and long&#8209;form reading.</p>
-          <p class="tech">CSS</p>
-          <p class="links">
-            <a href="https://github.com/kpgocek/Iron-Alloy">Source<span class="visually-hidden"> code for Iron
-                Alloy</span></a>
-          </p>
-        </article>
-      </div>
-    </section>
+          <li class="act">
+            <span class="act__no" aria-hidden="true">III</span>
+            <div>
+              <h3 class="act__title"><a class="act__link" href="https://github.com/kpgocek/Iron-Alloy">Iron Alloy</a> <span class="tag tag--open">In progress</span></h3>
+              <p>A monochromatic Obsidian theme designed for focused writing and long&#8209;form reading. Work in
+                  progress.</p>
+              <ul class="credits" aria-label="Built with">
+                <li>CSS</li>
+              </ul>
+            </div>
+            <p class="act__links label">
+              <a href="https://github.com/kpgocek/Iron-Alloy">Source code</a>
+            </p>
+          </li>
+        </ol>
+      </section>
 
-    <section class="section" id="about" aria-labelledby="about-title">
-      <h2 id="about-title">About</h2>
-      <div class="body">
-        <p class="statement">I build backend systems with a <em>product mindset</em>: readable architecture, maintainable
+      <section class="block" id="about" aria-labelledby="about-title">
+        <h2 id="about-title" class="block-head label">About</h2>
+        <p class="prose">I build backend systems with a <em>product mindset</em>: readable architecture, maintainable
           code, and practical problems actually solved. Outside work, I ship my own products end to end. Mostly open
-          source, occasionally finished.</p>
-      </div>
-    </section>
-
-    <section class="section" id="stack" aria-labelledby="stack-title">
-      <h2 id="stack-title">Working with</h2>
-      <div class="body">
-        <ul class="inline-list" role="list" aria-label="Main technologies">
+          source.</p>
+        <h3 class="label prose">My preferred tech stack</h3>
+        <ul class="credits">
           <li>C#</li>
-          <li>.NET</li>
           <li>ASP.NET&nbsp;Core</li>
           <li>REST&nbsp;APIs</li>
+          <li>Blazor</li>
           <li>SQL</li>
-          <li>Integrations</li>
+          <li>EF Core</li>
+          <li>Docker</li>
+          <li>Git</li>
         </ul>
-        <p class="secondary">Also: EF Core, PostgreSQL, Blazor, SignalR</p>
-      </div>
-    </section>
+      </section>
 
-    <section class="section contact" id="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Contact</h2>
-      <div class="body">
-        <p class="statement">For engineering, projects, or collaboration, find me on X or open an issue on GitHub. Email
-          will follow once I get a domain, another project that I work on occasionally.</p>
-        <p class="links">
-          <a href="https://x.com/kpgocek" rel="me">X (@kpgocek)</a>
-          <a href="https://github.com/kpgocek/kpgocek.github.io/issues/new">Open an issue<span class="visually-hidden">
-              on GitHub</span></a>
-          <a href="https://ko-fi.com/kpgocek">Support me on Ko-fi</a>
+      <section class="block" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title" class="block-head label">Contact</h2>
+        <p class="prose">For engineering, projects, or collaboration, contact me via email.</p>
+        <p class="actions">
+          <a class="ticket ticket--fill" href="mailto:krzysztof.gocek@protonmail.com">Email</a>
+          <a class="ticket" href="https://x.com/kpgocek" rel="me">X (@kpgocek)</a>
+          <a class="ticket" href="https://github.com/kpgocek/kpgocek.github.io/issues/new">Open an issue</a>
         </p>
-      </div>
-    </section>
-  </main>
+        <p class="quiet"><a href="https://ko-fi.com/kpgocek">Support me on Ko-fi</a></p>
+      </section>
+    </main>
 
-  <footer class="site-footer">
-    <div class="wrap">
-      <div class="footer-row">
-        <p>© 2026 Krzysztof P. Gocek</p>
-        <p>Plain HTML and CSS, plus one small script. No build step, no dependencies, no tracking.</p>
-      </div>
-    </div>
-  </footer>
+    <footer class="stub">
+      <p>© 2026 Krzysztof P. Gocek</p>
+      <p>Plain HTML and CSS. No build step, no dependencies, no tracking.</p>
+    </footer>
+  </div>
 </body>
 
 </html>
