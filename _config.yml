@@ -3,3 +3,4 @@ exclude:
   - PRODUCT.md
   - DESIGN.md
   - img/portrait.jpg
+  - img/*.json
